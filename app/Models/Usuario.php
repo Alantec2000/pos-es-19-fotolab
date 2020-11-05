@@ -36,7 +36,7 @@ class Usuario extends User
     {
         return $this->belongsTo(Imagem::class, 'id_foto_perfil');
     }
-    
+
     public function getAuthPassword()
     {
         return $this->senha;
