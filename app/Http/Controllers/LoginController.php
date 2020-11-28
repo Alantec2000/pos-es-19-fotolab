@@ -18,32 +18,10 @@ class LoginController extends Controller
         return view('login.index');
     }
 
-    public function logout() 
+    public function signout() 
     {
         if (!Auth::check()) {
             return redirect('/signin');
-        }
-
-        Auth::logout();
-
-        return redirect('/');
-    }
-
-    public function signout()
-    {
-        $params = request()->all();
-        
-        $validation = Validator::make($params, [
-            'email' => 'required|string',
-            'senha' => 'required|string'
-        ]);
-
-        if ($validation->fails()) {
-            $responseContent = [
-                'status' => 'error',
-                'data' => $validation->errors()
-            ];
-            return response($responseContent, 403);
         }
 
         Auth::logout();
@@ -55,10 +33,7 @@ class LoginController extends Controller
     {
         $authenticationParams = $request->validated();
 
-        $authenticationParams = [
-            'email' => $authenticationParams['email'],
-            'password' => $authenticationParams['senha']
-        ];
+        $authenticationParams['password'] = $authenticationParams['senha'];
 
         if (!Auth::attempt($authenticationParams)) {
             return redirect('/signin')->withErrors([
