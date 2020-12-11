@@ -75,6 +75,6 @@ class Usuario extends User
 
     public function temEmailUnico()
     {
-        return (self::whereEmail($this->email)->count() > 0);
+        return self::whereEmail($this->email)->count() > 0;
     }
 }
