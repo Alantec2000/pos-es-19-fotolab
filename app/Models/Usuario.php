@@ -64,4 +64,18 @@ class Usuario extends User
     {
      return $this->senha;
     }
+
+    public function setAtributos(array $atributos)
+    {
+        foreach($this->fillable as $fillableAtributte) {
+            if (isset($atributo[$fillableAtributte])) {
+                $this->$fillableAtributte = $atributo[$fillableAtributte];
+            }
+        }
+    }
+
+    public function temEmailUnico()
+    {
+        return self::whereEmail($this->email)->count() > 0;
+    }
 }

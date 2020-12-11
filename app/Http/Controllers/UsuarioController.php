@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CadastrarUsuario;
+use App\Http\Requests\CadastrarUsuarioRequest;
 use App\Support\Factory\UserFactory;
 use Exception;
 use Throwable;
@@ -14,7 +14,7 @@ class UsuarioController extends Controller
         return view('usuario.cadastro.formulario');
     }
 
-    public function criar(CadastrarUsuario $request)
+    public function criar(CadastrarUsuarioRequest $request)
     {
         try {
             $dadosUsuario = $request->validated();
@@ -23,21 +23,19 @@ class UsuarioController extends Controller
                 'atributos' => $dadosUsuario
             ]);
 
-            $usuario->firstOrNew($dadosUsuario['email']);
-
-            if (!empty($usuario->id)) {
-                throw new Exception(trans('CreateUser.errors.userExists'));
-            }
+            $usuario->fill($dadosUsuario);
 
             $usuario->save();
         } catch (Throwable $e) {
-            return redirect('usuario.cadastro.erro', 400);
+            return redirect('usuario.cadastro.erro', 400)->withErrors([
+                'generalError' => $e->getMessage()
+            ]);
         }
 
         return redirect('usuario.cadastro.sucesso')
             ->with('nome_usuario', $usuario->nome);
     }
-    
+
     public function listarUsuarios()
     {
         return [];
