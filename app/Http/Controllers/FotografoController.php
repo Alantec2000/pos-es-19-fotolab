@@ -10,7 +10,7 @@ class FotografoController extends Controller
     public function perfil($id)
     {
         $fotografo = Fotografo::whereId($id)
-            ->whereIdTipoPerfil(TipoPerfil::whereTipoPerfil('Fotografo')->first()->id)
+            ->whereIdTipoPerfil(TipoPerfil::whereNome('Fotografo')->first()->id)
             ->with([
                 'fotoPerfil',
                 'fotoCapa'
