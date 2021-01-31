@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Validator;
 
 class Usuario extends User
 {
@@ -58,6 +60,20 @@ class Usuario extends User
             $value = Hash::make($value);
         }
         $this->attributes['password'] = $value;
+    }
+
+    public function definirUrlFotoPerfil(UploadedFile $fotoPerfil): void
+    {
+        $storagePath = storage_path('/app/imgs/foto_perfil/');
+        $fotoPerfil->storeAs($storagePath, $fotoPerfil->hashName());
+        $this->url_foto_perfil = $fotoPerfil->hashName();
+    }
+
+    public function definirUrlFotoCapa(UploadedFile $fotoCapa): void
+    {
+        $storagePath = storage_path('/app/imgs/foto_capa/');
+        $fotoCapa->storeAs($storagePath, $fotoCapa->hashName());
+        $this->url_foto_capa = $fotoCapa->hashName();
     }
 
     public function temEmailUnico()

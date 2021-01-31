@@ -53,6 +53,18 @@ return [
             'root' => storage_path('app/imgs'),
             'url' => env('APP_URL') . '/storage/app/imgs'
         ],
+        
+        'imgs_foto_perfil' => [
+            'driver' => 'local',
+            'root' => storage_path('app/imgs/foto_perfil'),
+            'url' => env('APP_URL') . '/storage/app/imgs/foto_perfil'
+        ],
+
+        'imgs_foto_capa' => [
+            'driver' => 'local',
+            'root' => storage_path('app/imgs/foto_capa'),
+            'url' => env('APP_URL') . '/storage/app/imgs/foto_capa'
+        ],
 
         'public' => [
             'driver' => 'local',
