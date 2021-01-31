@@ -31,7 +31,7 @@ class CadastrarUsuarioRequest extends FormRequest
             'nome' => 'bail|required|string|regex:/([A-ú. ªº]+)/i|max:20',
             'sobrenome' => 'bail|required|string|max:100',
             'data_nascimento' => 'bail|required|date_format:d/m/Y',
-            'imagem_perfil' => 'sometimes|nullable|file|max:4000|mimes:png,jpg,jpeg',
+            'foto_perfil' => 'sometimes|nullable|file|max:4000|mimes:png,jpg,jpeg',
             'foto_capa' => 'sometimes|nullable|file|max:4000|mimes:png,jpg,jpeg',
             'tipo' => 'string|in:fotografo,cliente'
         ];
