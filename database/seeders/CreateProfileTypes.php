@@ -26,7 +26,7 @@ class CreateProfileTypes extends Seeder
             DB::beginTransaction();
             foreach ($profileTypes as $type) {
                 $model = TipoPerfil::firstOrCreate($type);
-    
+
                 if ($model->wasRecentlyCreated) {
                     dump("Tipo: $model->nome; foi criado com sucesso!");
                 }
