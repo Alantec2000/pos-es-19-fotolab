@@ -51,9 +51,10 @@ return [
         'imgs' => [
             'driver' => 'local',
             'root' => storage_path('app/imgs'),
-            'url' => env('APP_URL') . '/storage/app/imgs'
+            'url' => '/imgs',
+            'visibility' => 'public',
         ],
-        
+
         'imgs_foto_perfil' => [
             'driver' => 'local',
             'root' => storage_path('app/imgs/foto_perfil'),
@@ -70,13 +71,6 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-        ],
-
-        'imgs' => [
-            'driver' => 'local',
-            'root' => storage_path('app/imgs'),
-            'url' => '/imgs',
             'visibility' => 'public',
         ],
 

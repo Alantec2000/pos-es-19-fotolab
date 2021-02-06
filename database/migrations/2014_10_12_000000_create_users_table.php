@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
         Schema::create(Usuario::TABLE_NAME, function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedTinyInteger('id_tipo_perfil');
+            $table->unsignedTinyInteger('tipo_perfil_id');
             $table->string('url_foto_perfil')->nullable();
             $table->string('url_foto_capa')->nullable();
 
@@ -35,6 +35,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::table(Usuario::TABLE_NAME, function (Blueprint $table) {
+            $table->foreign('tipo_perfil_id')->references('id')->on(TipoPerfil::TABLE_NAME);
+        });
     }
 
     /**
@@ -44,6 +48,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists(Usuario::TABLE_NAME);
     }
 }

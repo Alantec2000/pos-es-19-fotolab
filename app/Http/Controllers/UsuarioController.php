@@ -2,53 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOS\CadastrarUsuario;
 use App\Http\Requests\CadastrarUsuarioRequest;
-use App\Models\TipoPerfil;
-use App\Models\Usuario;
-use App\Support\Factory\UserFactory;
-use Exception;
+use App\Services\TipoPerfilService;
+use App\Services\UsuarioService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Throwable;
 
 class UsuarioController extends Controller
 {
+    /**
+     * @var UsuarioService
+     */
+    private $usuarioService;
+
+    /**
+     * @var TipoPerfilService
+     */
+    private $tipoPerfilService;
+
+    public function __construct(UsuarioService $usuarioService, TipoPerfilService $tipoPerfilService)
+    {
+        $this->usuarioService = $usuarioService;
+        $this->tipoPerfilService = $tipoPerfilService;
+    }
+
+    /**
+     * Rota principal do formulário de cadastro
+     *
+     * @return Application|Factory|View
+     */
     public function formulario()
     {
         return view('usuario.cadastro.formulario');
     }
 
+    /**
+     * Rota de cadastro do usuário. Cria um novo usuário no
+     * banco de dados de acordo com os dados informados.
+     *
+     * Redireciona para o formulário novamente em caso de erro.
+     *
+     * @param CadastrarUsuarioRequest $request
+     *
+     * @return Application|Factory|View|RedirectResponse|Redirector
+     */
     public function criar(CadastrarUsuarioRequest $request)
     {
         try {
-            $dadosUsuario = $request->validated();
-            
-            $tipoPerfil = TipoPerfil::make()->fromNome($dadosUsuario['tipo']);
+            $cadastrarUsuarioObject = new CadastrarUsuario($request->validated());
 
-            $usuarioMesmoEmail = Usuario::whereEmail($dadosUsuario['email'])->first();
-            throw_if($usuarioMesmoEmail, trans('CadastroUsuario.email.duplicado'));
+            $tipoPerfil = $this->tipoPerfilService->obterPeloNome($cadastrarUsuarioObject->tipo);
+            $this->usuarioService->verificarEmailUnico($cadastrarUsuarioObject->email);
 
-            $usuario = Usuario::make($dadosUsuario);
-            $usuario->senha = $dadosUsuario['senha'];
-            $usuario->id_tipo_perfil = $tipoPerfil->id;
-            $usuario->data_nascimento = date('Y-m-d', strtotime($dadosUsuario['data_nascimento']));
-            
-            if (!empty($dadosUsuario['foto_perfil'])) {
-                $usuario->definirUrlFotoPerfil($dadosUsuario['foto_perfil']);
-            }
-            
-            if (!empty($dadosUsuario['foto_capa']) && $tipoPerfil->nome === 'Fotografo') {
-                $usuario->definirUrlFotoCapa($dadosUsuario['foto_capa']);
-            }
-
-            $usuario->save();
+            $cadastrarUsuarioObject->tipo_perfil_id = $tipoPerfil->id;
+            $usuario = $this->usuarioService->cadastrarNovoUsuario($cadastrarUsuarioObject);
         } catch (Throwable $e) {
             return redirect(route('usuario.cadastro'))->withErrors([
                 'generalError' => $e->getMessage()
             ]);
         }
 
-        return view('usuario.cadastro.sucesso')
-            ->with('id', $usuario->id)
-            ->with('nome_usuario', $usuario->nome);
+        return view('usuario.cadastro.sucesso', $usuario->toArray());
     }
 
     public function listarUsuarios()

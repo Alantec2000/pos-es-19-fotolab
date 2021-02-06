@@ -22,7 +22,23 @@ class TipoPerfilFactory extends Factory
     public function definition()
     {
         return [
-            'tipo_perfil' => $this->faker->randomElement(['Cliente', 'Fotografo'])
+            'nome' => $this->faker->randomElement(['Cliente', 'Fotografo'])
         ];
+    }
+
+    /**
+     * Define o estado como fotografo.
+     *
+     * @param string $nome
+     *
+     * @return Factory
+     */
+    public function cliente()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'nome' => 'cliente',
+            ];
+        });
     }
 }
