@@ -21,7 +21,7 @@ Route::namespace('App\Http\Controllers')
 
     Route::group(['prefix' => 'usuario'], function () {
         Route::get('/perfil', 'UsuarioController@obterDadosPerfil');
-        
+
         Route::group(['prefix' => 'fotografo', 'middleware' => 'checkIsFotografo'], function () {
             Route::get('/listar', 'UsuarioController@listarFotografo');
         });
@@ -29,11 +29,14 @@ Route::namespace('App\Http\Controllers')
 
     Route::group(['prefix' => 'fotografo'], function () {
         Route::get('/perfil/{id}', 'FotografoController@perfil');
+
+        Route::get('/{id}/servico', 'ServicoController@index')->name('fotografo.servico');
+        Route::post('/{id}/servico', 'ServicoController@create')->name('fotografo.servico.novo');
     });
-    
+
     Route::get('/signin', 'LoginController@signin');
     Route::get('/signout', 'LoginController@signout');
     Route::post('/signin/authenticate', 'LoginController@autenticarUsuario');
-    
+
     Route::get('/register', 'RegisterController@Register');
 });
