@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @method static find()
+ * @method static findOrFail(int $fotografo)
+ */
 class Fotografo extends Usuario
 {
     use HasFactory;

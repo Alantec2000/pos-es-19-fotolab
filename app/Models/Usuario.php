@@ -36,7 +36,12 @@ class Usuario extends User
     {
         return $this->belongsTo(Imagem::class, 'id_foto_perfil');
     }
-    
+
+    public function servico()
+    {
+        return $this->hasMany(Servico::class, 'id', 'fotografo_id');
+    }
+
     public function getAuthPassword()
     {
         return $this->senha;
