@@ -8,11 +8,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @method static whereId($id)
+ */
 class Servico extends Model
 {
     use HasFactory;
 
     const TABLE_NAME = 'fl_servicos';
+    const STATUS_CLIENTE = [
+        'criado',
+        'cancelado',
+        'avaliado',
+    ];
+
+    const STATUS_FOTOGRAFO = [
+        'analisando',
+        'proposta aceita',
+        'proposta recusada',
+        'finalizado',
+    ];
 
     protected $table = self::TABLE_NAME;
 
@@ -29,6 +44,16 @@ class Servico extends Model
         'descricao'
     ];
 
+    public function fotografo()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
     public function setDataInicioAttribute($value)
     {
         $this->attributes['data_inicio'] = Carbon::createFromFormat('d/m/Y H:i', $value)
@@ -41,11 +66,21 @@ class Servico extends Model
             ->format('Y-m-d H:i:s');
     }
 
+    public function obterStatusFotografo()
+    {
+        return self::STATUS_FOTOGRAFO;
+    }
+
+    public function obterStatusCliente()
+    {
+        return self::STATUS_CLIENTE;
+    }
+
     public static function fromDadosCadastro(DadosCadastroServicoService $dadosCadastroServico): self
     {
         return new self([
             'fotografo_id' => $dadosCadastroServico->fotografo,
-            'cliente_id' => Auth::user()->id,
+            'cliente_id' => Auth::id(),
             'data_inicio' => $dadosCadastroServico->data_inicio,
             'data_fim' => $dadosCadastroServico->data_fim,
             'titulo' => $dadosCadastroServico->titulo,
