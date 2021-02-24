@@ -17,6 +17,11 @@ class Usuario extends User
 
     protected $guarded = ['id', 'password'];
 
+    public function tipoPerfil()
+    {
+        return $this->hasOne(TipoPerfil::class, 'id', 'id_tipo_perfil');
+    }
+
     public function fotografo()
     {
         return $this->hasOne(Fotografo::class, 'id_usuario');
@@ -53,15 +58,6 @@ class Usuario extends User
             $value = Hash::make($value);
         }
         $this->attributes['password'] = $value;
-    }
-
-    public function setAtributos(array $atributos)
-    {
-        foreach ($this->fillable as $fillableAtributte) {
-            if (isset($atributo[$fillableAtributte])) {
-                $this->$fillableAtributte = $atributo[$fillableAtributte];
-            }
-        }
     }
 
     public function temEmailUnico()

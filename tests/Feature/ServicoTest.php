@@ -2,14 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\Fotografo;
 use App\Models\Servico;
-use App\Models\TipoPerfil;
 use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class ServicoTest extends TestCase
@@ -35,17 +32,89 @@ class ServicoTest extends TestCase
         $cliente = Usuario::factory()->cliente()->createOne();
 
         $response = $this->actingAs($cliente)
-            ->post(route('fotografo.servico.novo', [
+            ->post(route('servico.store', [
                 'id' => $params['fotografo']
             ]), $params);
 
         $response->assertStatus(200);
-        $response->assertViewIs('fotografo.servico.novo.sucesso');
+        $response->assertViewIs('servico.novo.sucesso');
         $this->assertDatabaseHas(Servico::TABLE_NAME, [
             'cliente_id' => $cliente->id,
             'fotografo_id' => $params['fotografo'],
             'status' => 'criado',
             'avaliado' => false
+        ]);
+    }
+
+    public function testFotografoAtualizarStatusServicoSucesso()
+    {
+        $this->seed('CreateProfileTypes');
+
+        $servico = Servico::factory()->createOne();
+        $fotografo = $servico->fotografo;
+
+        $status = 'em analise';
+
+        $response = $this->actingAs($fotografo)
+            ->patch(route('fotografo.servico.update.status', ['servico' => $servico->id, 'status' => $status]));
+
+        $response->assertRedirect(route('servico.index'));
+
+        $this->assertDatabaseHas('fl_servicos', [
+            'id' => $servico->id,
+            'status' => $status
+        ]);
+    }
+
+    public function testClienteAtualizarStatusServicoSucesso()
+    {
+        $this->seed('CreateProfileTypes');
+
+        $servico = Servico::factory()->createOne();
+        $cliente = $servico->cliente;
+
+        $status = 'cancelado';
+
+        $response = $this->actingAs($cliente)
+            ->patch(route('cliente.servico.update.status', ['servico' => $servico->id, 'status' => $status]));
+
+        $response->assertRedirect(route('servico.index'));
+
+        $this->assertDatabaseHas('fl_servicos', [
+            'id' => $servico->id,
+            'status' => $status
+        ]);
+    }
+
+    public function testClienteAtualizarServicoSucesso()
+    {
+        $this->seed('CreateProfileTypes');
+
+        $servico = Servico::factory()->createOne();
+        $cliente = $servico->cliente;
+
+        $dataInicio = $this->faker->dateTime;
+        $dataFim = $this->faker->dateTimeBetween('+10 days', '+20 days');
+
+        $params = [
+            'data_inicio' => $dataInicio->format('d/m/Y H:i'),
+            'data_fim' => $dataFim->format('d/m/Y H:i'),
+            'titulo' => 'titulo_alterado',
+            'descricao' => 'descricao alterada'
+        ];
+
+        $response = $this->actingAs($cliente)
+            ->patch(route('servico.update', [
+                'servico' => $servico->id
+            ]), $params);
+
+        $response->assertRedirect(route('servico.index'));
+
+        $this->assertDatabaseHas('fl_servicos', [
+            'titulo' => $params['titulo'],
+            'descricao' => $params['descricao'],
+            'data_inicio' => $dataInicio->format('Y-m-d H:i'),
+            'data_fim' => $dataFim->format('Y-m-d H:i'),
         ]);
     }
 }

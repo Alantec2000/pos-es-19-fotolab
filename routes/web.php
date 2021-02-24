@@ -34,13 +34,17 @@ Route::namespace('App\Http\Controllers')
         Route::group(['prefix' => 'fotografo', 'middleware' => 'checkIsFotografo'], function () {
             Route::get('/listar', 'UsuarioController@listarFotografo');
         });
+        Route::patch('/servico/{servico}/{status}', 'ServicoController@atualizarStatusCliente')
+            ->name('cliente.servico.update.status');
     });
+
+    Route::resource('servico', 'ServicoController')
+        ->only(['index', 'show', 'create', 'store', 'edit', 'update']);
 
     Route::group(['prefix' => 'fotografo'], function () {
         Route::get('/perfil/{id}', 'FotografoController@perfil');
-
-        Route::get('/{id}/servico', 'ServicoController@index')->name('fotografo.servico');
-        Route::post('/{id}/servico', 'ServicoController@create')->name('fotografo.servico.novo');
+        Route::patch('/servico/{servico}/{status}', 'ServicoController@atualizarStatusFotografo')
+        ->name('fotografo.servico.update.status');
     });
 
     Route::get('/signin', 'LoginController@signin');
