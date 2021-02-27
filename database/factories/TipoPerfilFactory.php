@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\TipoPerfil;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 class TipoPerfilFactory extends Factory
 {
@@ -22,7 +23,7 @@ class TipoPerfilFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => $this->faker->randomElement(['Cliente', 'Fotografo'])
+            'nome' => Arr::random(['Cliente', 'Fotografo'])
         ];
     }
 
@@ -37,7 +38,23 @@ class TipoPerfilFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'nome' => 'cliente',
+                'nome' => 'Cliente',
+            ];
+        });
+    }
+
+     /**
+     * Define o estado como fotografo.
+     *
+     * @param string $nome
+     *
+     * @return Factory
+     */
+    public function fotografo()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'nome' => 'Fotografo',
             ];
         });
     }
