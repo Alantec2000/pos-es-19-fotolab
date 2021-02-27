@@ -30,7 +30,7 @@ class UsuarioFactory extends Factory
             'email' => $this->faker->email(),
             'senha' => $this->faker->password(8, 15),
             'data_nascimento' => $this->faker->date('d/m/Y'),
-            'url_imagem_perfil' => null,
+            'url_foto_perfil' => null,
             'url_foto_capa' => null,
             'descricao' => $this->faker->sentence()
         ];
