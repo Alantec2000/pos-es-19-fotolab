@@ -53,7 +53,7 @@ class ServicoTest extends TestCase
         $servico = Servico::factory()->createOne();
         $fotografo = $servico->fotografo;
 
-        $status = 'em analise';
+        $status = 'analisando';
 
         $response = $this->actingAs($fotografo)
             ->patch(route('fotografo.servico.update.status', ['servico' => $servico->id, 'status' => $status]));
