@@ -27,7 +27,7 @@ class ServicoController extends Controller
 
     public function index()
     {
-        if (auth()->user()->tipoPerfil->tipo_perfil === 'Fotografo') {
+        if (auth()->user()->tipoPerfil->nome === 'Fotografo') {
             return view('servico.index.fotografo');
         } else {
             return view('servico.index.cliente');
