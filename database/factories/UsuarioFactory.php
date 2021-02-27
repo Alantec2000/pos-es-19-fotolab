@@ -35,4 +35,22 @@ class UsuarioFactory extends Factory
             'descricao' => $this->faker->sentence()
         ];
     }
+
+    public function fotografo()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'tipo_perfil_id' => TipoPerfil::factory()->state('Fotografo'),
+            ];
+        });
+    }
+
+    public function cliente()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'tipo_perfil_id' => TipoPerfil::factory()->state('Cliente'),
+            ];
+        });
+    }
 }

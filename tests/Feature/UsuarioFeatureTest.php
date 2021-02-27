@@ -9,7 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class UsuarioTest extends TestCase
+class UsuarioFeatureTest extends TestCase
 {
     use WithFaker;
     use RefreshDatabase;
