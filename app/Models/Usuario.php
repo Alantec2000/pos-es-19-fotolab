@@ -19,7 +19,7 @@ class Usuario extends User
 
     protected $table = self::TABLE_NAME;
 
-    protected $fillable = ['nome', 'sobrenome', 'email', 'password', 'tipo_perfil_id', 'data_nascimento'];
+    protected $fillable = ['nome', 'sobrenome', 'email', 'senha', 'tipo_perfil_id', 'data_nascimento'];
 
     protected $guarded = ['id', 'senha'];
 

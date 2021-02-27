@@ -32,7 +32,7 @@ class CreateTestUser extends Seeder
                 'email' => 'alan@linduxo.com.br',
                 'password' => Hash::make('123'),
                 'data_nascimento' => $dataNascimento,
-                'id_tipo_perfil' => $tipoPerfil->id,
+                'tipo_perfil_id' => $tipoPerfil->id,
             ];
 
             $testUser = Usuario::firstOrCreate($testUsersData);
