@@ -40,7 +40,7 @@ class UsuarioFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'tipo_perfil_id' => TipoPerfil::factory()->state('Fotografo'),
+                'tipo_perfil_id' => TipoPerfil::factory()->fotografo(),
             ];
         });
     }
@@ -49,7 +49,7 @@ class UsuarioFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'tipo_perfil_id' => TipoPerfil::factory()->state('Cliente'),
+                'tipo_perfil_id' => TipoPerfil::factory()->cliente(),
             ];
         });
     }
