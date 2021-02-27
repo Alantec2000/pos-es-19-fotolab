@@ -27,6 +27,7 @@ class UsuarioFactory extends Factory
         return [
             'nome' => $this->faker->firstName,
             'sobrenome' => $this->faker->lastName,
+            'tipo_perfil_id' => TipoPerfil::factory(),
             'email' => $this->faker->email(),
             'senha' => $this->faker->password(8, 15),
             'data_nascimento' => $this->faker->date('d/m/Y'),
