@@ -19,17 +19,17 @@ class CreateUsersTable extends Migration
         Schema::create(Usuario::TABLE_NAME, function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedTinyInteger('id_tipo_perfil');
-            $table->unsignedBigInteger('id_foto_perfil')->nullable();
-            $table->unsignedBigInteger('id_foto_capa')->nullable();
-            
+            $table->unsignedTinyInteger('tipo_perfil_id');
+            $table->string('url_foto_perfil')->nullable();
+            $table->string('url_foto_capa')->nullable();
+
             $table->string('nome');
             $table->string('sobrenome');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('senha');
             $table->boolean('bloqueado')->default(false);
             $table->string('descricao')->nullable();
-            
+
             $table->date('data_nascimento');
 
             $table->rememberToken();
@@ -37,7 +37,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::table(Usuario::TABLE_NAME, function (Blueprint $table) {
-            $table->foreign('id_tipo_perfil')->references('id')->on(TipoPerfil::TABLE_NAME);
+            $table->foreign('tipo_perfil_id')->references('id')->on(TipoPerfil::TABLE_NAME);
         });
     }
 
@@ -48,6 +48,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists(Usuario::TABLE_NAME);
     }
 }

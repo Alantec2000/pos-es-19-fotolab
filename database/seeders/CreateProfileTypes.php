@@ -14,11 +14,11 @@ class CreateProfileTypes extends Seeder
         $profileTypes = [
             [
                 'id' => 1,
-                'tipo_perfil' => 'Cliente'
+                'nome' => 'Cliente'
             ],
             [
                 'id' => 2,
-                'tipo_perfil' => 'Fotografo'
+                'nome' => 'Fotografo'
             ]
         ];
 
@@ -28,7 +28,7 @@ class CreateProfileTypes extends Seeder
                 $model = TipoPerfil::firstOrCreate($type);
     
                 if ($model->wasRecentlyCreated) {
-                    dump("Tipo: $model->tipo_perfil; foi criado com sucesso!");
+                    dump("Tipo: $model->nome; foi criado com sucesso!");
                 }
             }
             DB::commit();
