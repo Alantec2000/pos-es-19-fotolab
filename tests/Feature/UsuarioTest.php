@@ -20,14 +20,15 @@ class UsuarioTest extends TestCase
 
         $response = $this->post(route('usuario.cadastro.novo'), $params);
 
-        $this->assertDatabaseHas('fl_usuarios', [
-            'email' => $params['email']
-        ]);
-
         $response->assertStatus(200);
+        
         $response->assertViewIs('usuario.cadastro.sucesso');
         $response->assertViewHas('nome_usuario', $params['nome']);
         $response->assertViewHas('id');
+
+        $this->assertDatabaseHas('fl_usuarios', [
+            'email' => $params['email']
+        ]);
     }
 
     public function testCriarUsuarioComFotoPerfil()

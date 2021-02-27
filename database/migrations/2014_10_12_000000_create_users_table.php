@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('nome');
             $table->string('sobrenome');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('senha');
             $table->boolean('bloqueado')->default(false);
             $table->string('descricao')->nullable();
 
