@@ -21,7 +21,16 @@ Route::namespace('App\Http\Controllers')
 
     Route::group(['prefix' => 'usuario'], function () {
         Route::get('/perfil', 'UsuarioController@obterDadosPerfil');
-        
+
+        Route::group(['prefix' => 'cadastro'], function () {
+            Route::get('/', 'UsuarioController@formulario');
+            Route::post('/novo', 'UsuarioController@criar');
+            Route::get('/sucesso', function () {
+                return view('usuario.cadastro.sucesso');
+            });
+            Route::get('/erro', 'RegisterController@Register');
+        });
+
         Route::group(['prefix' => 'fotografo', 'middleware' => 'checkIsFotografo'], function () {
             Route::get('/listar', 'UsuarioController@listarFotografo');
         });
@@ -34,6 +43,4 @@ Route::namespace('App\Http\Controllers')
     Route::get('/signin', 'LoginController@signin');
     Route::get('/signout', 'LoginController@signout');
     Route::post('/signin/authenticate', 'LoginController@autenticarUsuario');
-    
-    Route::get('/register', 'RegisterController@Register');
 });
