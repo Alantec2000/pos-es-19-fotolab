@@ -2,9 +2,6 @@
 
 @section('pageName', 'Login')
 
-@section('css-view')
-@endsection
-
 @section('conteudo-view')
 <div id="form-session">
     <div class="panel">
@@ -30,5 +27,3 @@
 </div>
 @endsection
 
-@section('js-view')
-@endsection

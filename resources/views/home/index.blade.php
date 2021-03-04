@@ -1,8 +1,5 @@
 @extends('templates.master')
 
-@section('css-view')
-@endsection
-
 @section('conteudo-view')
     <div id="home">
         <div class="carousel">
@@ -62,7 +59,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('js-view')
 @endsection

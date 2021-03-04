@@ -8,7 +8,7 @@
     </div>
     <div class="buttons">
         @if(!Auth::check())
-            <a href="{{URL::to('/register')}}" class="btn bg-yellow ">Cadastre - se</a>
+            <a href="{{URL::to('/usuario/cadastro')}}" class="btn bg-yellow ">Cadastre - se</a>
         @endif
 
         @if(!Auth::check())

@@ -33,7 +33,7 @@ class CadastrarUsuarioRequest extends FormRequest
             'data_nascimento' => 'bail|required|date_format:d/m/Y',
             'foto_perfil' => 'sometimes|nullable|file|max:4000|mimes:png,jpg,jpeg',
             'foto_capa' => 'sometimes|nullable|file|max:4000|mimes:png,jpg,jpeg',
-            'tipo' => 'string|in:fotografo,cliente'
+            'tipo' => 'required|string|exists:App\Models\TipoPerfil,nome'
         ];
     }
 

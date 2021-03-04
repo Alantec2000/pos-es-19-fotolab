@@ -24,7 +24,7 @@ Route::namespace('App\Http\Controllers')
 
         Route::group(['prefix' => 'cadastro'], function () {
             Route::get('/', 'UsuarioController@formulario')->name('usuario.cadastro');
-            Route::post('/criar', 'UsuarioController@criar')->name('usuario.cadastro.novo');
+            Route::post('/', 'UsuarioController@criar')->name('usuario.cadastro.novo');
             Route::get('/sucesso', function ($nome) {
                 return view('usuario.cadastro.sucesso', ['nome' => $nome]);
             })->name('usuario.cadastro.sucesso');
