@@ -19,6 +19,8 @@ Route::namespace('App\Http\Controllers')
 ->group(function () {
     Route::get('/', 'HomeController@Home')->name('home');
 
+    Route::get('fotografo/perfil/{id}', 'FotografoController@perfil')->name('fotografo.perfil');
+
     Route::prefix('cadastro')->group(function () {
         Route::get('/', 'UsuarioController@formulario')->name('cadastro');
         Route::post('/', 'UsuarioController@criar')->name('cadastro.novo');
@@ -27,7 +29,7 @@ Route::namespace('App\Http\Controllers')
         })->name('cadastro.sucesso');
     });
 
-    Route::get('fotografo/perfil/{id}', 'FotografoController@perfil')->name('fotografo.perfil');
+
 
     Route::middleware('auth:web')->group(function () {
         Route::resource('servico', 'ServicoController')
