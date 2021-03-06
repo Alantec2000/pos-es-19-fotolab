@@ -7,25 +7,24 @@
 <div id="form-session">
     <div class="panel panel-2">
         <h2>CADASTRO</h2>
-        <form action="{{URL::to('/')}}" method="POST">
+        <form action="{{ route('home') }}" method="POST">
             {{ csrf_field() }}
 
             <div class="perfil">
                 <label> Perfil</label>
                 <div class="perfil-radio">
                     <div>
-                        <input type="radio" id="fotografo" name="perfil" value="fotografo"
-                               checked>
+                        <input type="radio" id="fotografo" name="perfil" value="fotografo" checked>
                         <label for="fotografo">Fotografo</label>
                       </div>
-                      
+
                       <div>
                         <input type="radio" id="cliente" name="perfil" value="cliente">
                         <label for="cliente">Cliente</label>
                       </div>
                 </div>
             </div>
-        
+
            <div id="ft_form_novo_usuario" class="form">
                 <input type="text" name="email" value="" placeholder="Email">
                 <input type="text" name="senha" value="" placeholder="Senha">

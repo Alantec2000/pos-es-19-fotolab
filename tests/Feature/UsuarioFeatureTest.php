@@ -18,11 +18,11 @@ class UsuarioFeatureTest extends TestCase
     {
         $params = $this->obterParametros();
 
-        $response = $this->post(route('usuario.cadastro.novo'), $params);
+        $response = $this->post(route('cadastro.novo'), $params);
 
         $response->assertStatus(200);
         
-        $response->assertViewIs('usuario.cadastro.sucesso');
+        $response->assertViewIs('cadastro.sucesso');
         $response->assertViewHas('nome_usuario', $params['nome']);
         $response->assertViewHas('id');
 
@@ -38,7 +38,7 @@ class UsuarioFeatureTest extends TestCase
         $params = $this->obterParametros();
         $params['foto_perfil'] = UploadedFile::fake()->image('minha_foto_perfil.jpg');
 
-        $response = $this->post(route('usuario.cadastro.novo'), $params);
+        $response = $this->post(route('cadastro.novo'), $params);
 
         $response->assertStatus(200);
         Storage::disk('imgs_foto_perfil')
@@ -56,7 +56,7 @@ class UsuarioFeatureTest extends TestCase
         $params = $this->obterParametros('Cliente');
 
         $params['foto_capa'] = UploadedFile::fake()->image('minha_foto_capa.jpg');
-        $response = $this->post(route('usuario.cadastro.novo'), $params);
+        $response = $this->post(route('cadastro.novo'), $params);
 
         $response->assertStatus(200);
         Storage::disk('imgs_foto_capa')->assertMissing(
@@ -75,7 +75,7 @@ class UsuarioFeatureTest extends TestCase
         $params = $this->obterParametros('Fotografo');
         $params['foto_capa'] = UploadedFile::fake()->image('minha_foto_capa.jpg');
 
-        $response = $this->post(route('usuario.cadastro.novo'), $params);
+        $response = $this->post(route('cadastro.novo'), $params);
 
         $response->assertStatus(200);
         Storage::disk('imgs_foto_capa')->assertExists(
@@ -94,7 +94,7 @@ class UsuarioFeatureTest extends TestCase
         $tipoParams = !$nomeTipoPerfil ? [] : ['nome' => $nomeTipoPerfil];
 
         $params = [
-            'email' => $this->faker->safeEmail,
+            'email' => '12345',
             'senha' => $this->faker->password(8, 15),
             'nome' => $this->faker->firstName(),
             'sobrenome' => $this->faker->lastName,

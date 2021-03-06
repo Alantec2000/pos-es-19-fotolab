@@ -3,19 +3,18 @@
         <h1>FotoLab</h1>
     </div>
     <div class="center">
-        <a href="{{URL::to('/')}}" class="active">Home</a>
+        <a href="{{ route('home') }}" class="active">Home</a>
         <a href="">Avaliação</a>
     </div>
     <div class="buttons">
-        @if(!Auth::check())
-            <a href="{{URL::to('/usuario/cadastro')}}" class="btn bg-yellow ">Cadastre - se</a>
-        @endif
+        @guest
+            <a href="{{ route('cadastro') }}" class="btn bg-yellow ">Cadastre - se</a>
+            <a href="{{ route('login') }}" class="btn bg-light-purple">Acessar</a>
+        @endguest
 
-        @if(!Auth::check())
-            <a href="{{URL::to('/signin')}}" class="btn bg-light-purple">Acessar</a>
-        @else
-            <a href="{{URL::to('/signout')}}" class="btn bg-light-purple">Sair</a>
-        @endif
+        @auth('web')
+            @include("templates.menu-perfil")
+        @endauth
     </div>
 
 </nav>

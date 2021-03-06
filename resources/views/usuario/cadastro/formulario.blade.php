@@ -7,7 +7,7 @@
             'field' => 'email'
         ])
     </p>
-    <form method="POST" action="{{ route('usuario.cadastro.novo') }}">
+    <form method="POST" action="{{ route('cadastro.novo') }}">
         @csrf
         <label for="email">E-mail</label>
         <input type="text" id="email" name="email">

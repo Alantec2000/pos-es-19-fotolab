@@ -14,7 +14,7 @@
             ])
         </p>
 
-        <form action="{{URL::to('/signin/authenticate')}}" method="POST">
+        <form action="{{ route('login.autenticar') }}" method="POST">
             {{ csrf_field() }}
 
            <div class="form">

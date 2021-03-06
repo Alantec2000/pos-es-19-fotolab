@@ -62,12 +62,12 @@ class UsuarioController extends Controller
             $cadastrarUsuarioObject->tipo_perfil_id = $tipoPerfil->id;
             $usuario = $this->usuarioService->cadastrarNovoUsuario($cadastrarUsuarioObject);
         } catch (Throwable $e) {
-            return redirect(route('usuario.cadastro'))->withErrors([
+            return redirect(route('cadastro'))->withErrors([
                 'generalError' => $e->getMessage()
             ]);
         }
 
-        return view('usuario.cadastro.sucesso', $usuario->toArray());
+        return view('cadastro.sucesso', $usuario->toArray());
     }
 
     public function listarUsuarios()
