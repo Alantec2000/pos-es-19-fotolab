@@ -64,7 +64,7 @@ body {
     width: 400px;
     border-radius: 100px;
     text-align: center;
-    font-size: 40px;
+    font-size: 25px;
     display: flex;
     align-items: end;
     justify-content: space-around;
@@ -94,7 +94,7 @@ body {
     font-weight: 600;
     padding: 10px;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 15px;
     text-decoration: none;
     margin: 5px;
     width: 200px;
@@ -111,7 +111,7 @@ body {
     justify-content: center;
     height: 100%;
     padding: 10px;
-    padding-top: 180px;
+    padding-top: 80px;
 
     background-image: url("../imgs/bg.png");
     background-repeat: repeat-x;
@@ -127,24 +127,35 @@ body {
     background-color: #ebebeebd;
 }
 
-#form-session .panel-2{
-    background-color: #ffc82c85;
+#form-session .panel-cadastro{
+    background-color: #ebebeebd;
+    padding-right: 40px;
+    padding-bottom: 20px;
+    padding-left: 40px;
 }
 
 #form-session .panel h2 {
     font-size: 40px;
 }
 
-#form-session .perfil {
+/* #form-session .perfil {
     text-align: center;
     display: flex;
     flex-direction: column;
     font-size: 25px;
+} */
+
+#form-session .lbl-perfil{
+    margin-bottom: 20px;
 }
 
-#form-session .perfil .perfil-radio {
+#form-session .perfil-radio {
     display: flex;
     justify-content: space-around;
+    font-size: 18px;
+    margin-bottom: 0px;
+    width: 260px;
+    margin-bottom: 20px;
 }
 
 #form-session .form {
@@ -163,18 +174,33 @@ body {
     background-color: #3f3d56;
     border: none;
     border-radius: 5px;
-    padding: 15px;
+    padding: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
     color: #FFFFFF;
     font-family: 'Kanit', sans-serif;
-    font-size: 20px;
+    font-size: 17px;
+    width: 250px;
+}
+
+#form-session .form label {
+    width: 170px;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 18px;
+}
+
+#form-session label {
+    width: 170px;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 18px;
 }
 
 #form-session .form input::placeholder {
-    color: #FFFFFF;
+    color: #ffffffe0;
     font-family: 'Kanit', sans-serif;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 #form-session .form .btn {
@@ -182,10 +208,26 @@ body {
     font-weight: 600;
     padding: 10px;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 14px;
     margin: 5px;
     text-align: center;
     border: none;
+    margin-top: 20px;
+}
+
+.d-r {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.j-ct-c {
+    justify-content: center;
+}
+
+.w-1 {
+    width: 200px;
 }
 
 /*
