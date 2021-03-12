@@ -1,5 +1,5 @@
 @extends('templates.master')
 
 @section('conteudo-view')
-    @include('servico.template.lista')
+    @include('servico.templates.lista')
 @endsection

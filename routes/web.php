@@ -19,7 +19,8 @@ Route::namespace('App\Http\Controllers')
 ->group(function () {
     Route::get('/', 'HomeController@Home')->name('home');
 
-    Route::get('fotografo/perfil/{id}', 'FotografoController@perfil')->name('fotografo.perfil');
+    Route::patch('/servico/{servico}/{status}', 'ServicoController@atualizarStatusCliente')
+        ->name('cliente.servico.update.status');
 
     Route::prefix('cadastro')->group(function () {
         Route::get('/', 'UsuarioController@formulario')->name('cadastro');
@@ -29,11 +30,11 @@ Route::namespace('App\Http\Controllers')
         })->name('cadastro.sucesso');
     });
 
-
+    Route::get('fotografo/perfil/{id}', 'FotografoController@perfil')->name('fotografo.perfil');
 
     Route::middleware('auth:web')->group(function () {
         Route::resource('servico', 'ServicoController')
-        ->only(['index']);
+        ->only(['index', 'show']);
 
         Route::group(['prefix' => 'usuario'], function () {
             Route::get('/perfil', 'UsuarioController@obterDadosPerfil');
@@ -43,7 +44,7 @@ Route::namespace('App\Http\Controllers')
             });
     
             Route::resource('servico', 'ServicoController')
-            ->only(['show', 'create', 'store', 'edit', 'update']);
+            ->only(['create', 'store', 'edit', 'update']);
     
             Route::prefix('servico')->group(function () {
                 Route::patch('/{servico}/{status}', 'ServicoController@atualizarStatusCliente')
