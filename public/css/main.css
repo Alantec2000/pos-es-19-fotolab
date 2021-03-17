@@ -4,6 +4,29 @@ body {
     margin: 0;
 }
 
+div.container {
+    max-width: fit-content;
+    margin: 0 auto;
+    margin-top: 5rem;
+    padding: 1.9rem 4rem 4rem;
+    border-radius: 8px;
+}
+
+.bg-light-gray {
+    background: #ebebeebd;
+    color: #000000;
+}
+
+.bg-green {
+    background: #29ce37bd;
+    color: #000000;
+}
+
+.bg-red {
+    background: #e93232bd;
+    color: white;
+}
+
 .bg-yellow {
     background-color: #FFC82C;
     color: #000000;
@@ -16,7 +39,6 @@ body {
 
 .bg-dark {
     background-color: #555aa8;
-    ;
     color: #FFFFFF;
 }
 
@@ -89,18 +111,27 @@ body {
     flex-wrap: wrap;
 }
 
-#menu .buttons .btn {
-    text-transform: uppercase;
+.btn {
     font-weight: 600;
     padding: 10px;
     border-radius: 5px;
-    font-size: 15px;
-    text-decoration: none;
-    margin: 5px;
-    width: 200px;
     text-align: center;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
 }
 
+a.bg-dark:active {
+    background-color: #3e44a2;
+}
+
+a.bg-dark:active:visited {
+    background: #eab10d;
+}
+
+a.bg-dark:visited {
+    background: #ffc82c;
+}
 
 /*
     Login e Register
