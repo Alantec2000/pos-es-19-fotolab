@@ -12,6 +12,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ServicoController extends Controller
 {
@@ -27,11 +28,24 @@ class ServicoController extends Controller
 
     public function index()
     {
-        if (auth()->user()->tipoPerfil->nome === 'Fotografo') {
-            return view('servico.fotografo.index');
-        } else {
-            return view('servico.cliente.index');
-        }
+        $servicos = Servico::when(
+            Auth::user()->temPerfilFotografo(),
+            function ($q) {
+                $q->whereFotografoId(Auth::id());
+            }
+        )->when(
+            Auth::user()->temPerfilCliente(),
+            function ($q) {
+                $q->whereClienteId(Auth::id());
+            }
+        )->get();
+        
+        return view('servico.index')->with(compact('servicos'));
+    }
+
+    public function show(Servico $servico)
+    {
+        return view('servico.detalhes', compact('servico'));
     }
 
     public function create()
@@ -91,7 +105,9 @@ class ServicoController extends Controller
 
         $servico->save();
 
-        return redirect(route('servico.index'));
+        return redirect(route('servico.show', [
+            'servico' => $servico->id
+        ]));
     }
 
     /**

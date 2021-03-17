@@ -22,6 +22,8 @@ class Usuario extends User
 
     protected $guarded = ['id', 'senha'];
 
+    protected $appends = ['nomeCompleto'];
+
     public function tipoPerfil()
     {
         return $this->belongsTo(TipoPerfil::class);
@@ -85,5 +87,15 @@ class Usuario extends User
     public function temEmailUnico()
     {
         return self::whereEmail($this->email)->count() > 0;
+    }
+
+    public function temPerfilFotografo(): bool
+    {
+        return $this->tipoPerfil->nome === TipoPerfil::FOTOGRAFO;
+    }
+
+    public function temPerfilCliente(): bool
+    {
+        return $this->tipoPerfil->nome === TipoPerfil::CLIENTE;
     }
 }
