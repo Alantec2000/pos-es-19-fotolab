@@ -76,6 +76,31 @@ class Servico extends Model
         return self::STATUS_CLIENTE;
     }
 
+    public function classeStatus()
+    {
+        $classes = [
+            'criado' => 'bg-yellow',
+            'cancelado' => 'bg-red',
+            'analisando' => 'bg-yellow',
+            'proposta aceita' => 'bg-green',
+            'proposta recusada' => 'bg-red',
+            'finalizado' => 'bg-yellow',
+            'criado' => 'bg-yellow',
+        ];
+
+        return $classes[$this->status];
+    }
+
+    public function formatarDatas()
+    {
+        $dataInicio = Carbon::createFromFormat('Y-m-d H:i:s', $this->data_inicio)
+        ->format('d/m/Y H:i');
+        $dataFim = Carbon::createFromFormat('Y-m-d H:i:s', $this->data_fim)
+        ->format('d/m/Y H:i');
+
+        return "$dataInicio ~ $dataFim";
+    }
+
     public static function fromDadosCadastro(DadosCadastroServicoService $dadosCadastroServico): self
     {
         return new self([

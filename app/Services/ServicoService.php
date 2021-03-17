@@ -20,6 +20,15 @@ class ServicoService
         $servico->save();
     }
 
+    public function obterServicos()
+    {
+        $servico = new Servico();
+
+        return $servico->whereFotografoId(auth()->id())
+        ->orWhere('cliente_id', auth()->id())
+        ->get();
+    }
+
     public function atualizar(DadosAtualizacaoServico $dadosAtualizacao)
     {
 
