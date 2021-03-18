@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CadastrarUsuarioRequest extends FormRequest
 {
-    protected $redirect = "usuario/cadastro#ft_form_novo_usuario";
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,7 +28,7 @@ class CadastrarUsuarioRequest extends FormRequest
             'senha' => 'bail|required|string|between:8,15',
             'nome' => 'bail|required|string|regex:/([A-ú. ªº]+)/i|max:20',
             'sobrenome' => 'bail|required|string|max:100',
-            'data_nascimento' => 'bail|required|date_format:d/m/Y',
+            'data_nascimento' => 'bail|required|date_format:Y-m-d',
             'foto_perfil' => 'sometimes|nullable|file|max:4000|mimes:png,jpg,jpeg',
             'foto_capa' => 'sometimes|nullable|file|max:4000|mimes:png,jpg,jpeg',
             'tipo' => 'required|string|exists:App\Models\TipoPerfil,nome'

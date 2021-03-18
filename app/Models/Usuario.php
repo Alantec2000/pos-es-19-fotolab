@@ -53,12 +53,6 @@ class Usuario extends User
         return $this->senha;
     }
 
-    public function setDataNascimentoAttribute(string $dataNascimento)
-    {
-        $dataNascimento = Carbon::createFromFormat('d/m/Y', $dataNascimento);
-        $this->attributes['data_nascimento'] = $dataNascimento->format('Y-m-d');
-    }
-
     public function setPasswordAttribute($value)
     {
         if (Hash::needsRehash($value)) {

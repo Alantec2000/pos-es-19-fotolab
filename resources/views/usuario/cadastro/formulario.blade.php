@@ -2,18 +2,17 @@
 
 @section('conteudo-view')
     <div id="form-session">
-        <p id="erros">
-            @include('templates.errors', [
-                'errors' => $errors,
-                'field' => 'email'
-            ])
-        </p>
         <form method="POST" action="{{ route('cadastro.novo') }}" class="panel-cadastro">
             @csrf
             <div class="d-r">
                 <h2>CADASTRO</h2>
             </div>
-
+            <p id="erros">
+                @include('templates.errors', [
+                    'errors' => $errors,
+                    'field' => 'email'
+                ])
+            </p>
             <div class="d-r">
                 
                     <label class="lbl-perfil">Tipo do perfil:</label>

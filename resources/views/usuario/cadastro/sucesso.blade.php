@@ -7,8 +7,8 @@
 <div id="form-session">
     <div class="panel panel-2">
         <h2>Sucesso</h2>
-        
-        <button type="submit" name="login" class="btn bg-dark">Voltar para Home</button>
+
+        <a href="{{route('home')}}" class="btn bg-dark">Voltar para Home</a>
     </div>
 </div>
 @endsection

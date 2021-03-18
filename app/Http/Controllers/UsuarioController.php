@@ -67,7 +67,7 @@ class UsuarioController extends Controller
             ]);
         }
 
-        return view('cadastro.sucesso', $usuario->toArray());
+        return view('usuario.cadastro.sucesso', $usuario->toArray());
     }
 
     public function listarUsuarios()
