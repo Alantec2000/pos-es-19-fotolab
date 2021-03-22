@@ -21,6 +21,10 @@ class Usuario extends User
 
     protected $fillable = ['nome', 'sobrenome', 'email', 'senha', 'tipo_perfil_id', 'data_nascimento'];
 
+    protected $casts = [
+        'data_nascimento' => 'datetime:Y-m-d'
+    ];
+
     protected $guarded = ['id', 'senha'];
 
     protected $appends = ['nomeCompleto'];

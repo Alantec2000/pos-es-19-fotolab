@@ -1,10 +1,8 @@
 <nav id="menu">
     <div>
-        <h1>FotoLab</h1>
-    </div>
-    <div class="center">
-        <a href="{{ route('home') }}" class="active">Home</a>
-        <a href="">Avaliação</a>
+        <h1>
+            <a id="logo-fotolab" href="{{ route('home') }}">FotoLab</a>
+        </h1>
     </div>
     <div class="buttons">
         @guest

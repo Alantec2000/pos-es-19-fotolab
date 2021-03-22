@@ -27,16 +27,15 @@ Route::namespace('App\Http\Controllers')
         })->name('cadastro.sucesso');
     });
 
+    Route::resource('fotografo', 'FotografoController')
+        ->only(['index', 'show']);
+
     Route::middleware('auth:web')->group(function () {
         Route::resource('servico', 'ServicoController')
         ->only(['index', 'show']);
 
         Route::group(['prefix' => 'usuario'], function () {
             Route::get('/perfil', 'UsuarioController@obterDadosPerfil');
-    
-            Route::group(['prefix' => 'fotografo', 'middleware' => 'checkIsFotografo'], function () {
-                Route::get('/listar', 'UsuarioController@listarFotografo');
-            });
 
             Route::resource('servico', 'ServicoController')
             ->only(['create', 'store', 'edit', 'update']);
@@ -46,9 +45,12 @@ Route::namespace('App\Http\Controllers')
                 ->name('cliente.servico.update.status');
             });
         });
-    
-        Route::group(['prefix' => 'fotografo'], function () {
-            Route::get('/servico/{servico}/{status}', 'ServicoController@atualizarStatusFotografo')
+
+        Route::resource('fotografo', 'FotografoController')
+        ->only(['edit', 'update']);
+
+        Route::prefix('fotografo')->group(function () {
+            Route::patch('/servico/{servico}/{status}', 'ServicoController@atualizarStatusFotografo')
             ->name('fotografo.servico.update.status');
         });    
     });

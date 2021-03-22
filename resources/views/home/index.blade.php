@@ -1,62 +1,47 @@
 @extends('templates.master')
 
+@section('css-view')
+    <style type="text/css">
+        #conheca-outros-fotografos {
+            text-align: center;
+            margin: 40px;
+        }
+
+        #conheca-outros-fotografos a {
+            font-size: 2.5rem;
+            font-weight: 400;
+        }
+
+        #lista_fotografos {
+            margin-top: 2rem 0.6rem;
+        }
+
+        #lista_fotografos h1 {
+            font-weight: 300;
+        }
+    </style>
+@endsection
+
 @section('conteudo-view')
     <div id="home">
-        <div class="carousel">
-            <div class="carousel-photo" style="background-image: url({{ URL::asset('/imgs/banner.jpg') }})"></div>
-            <div class="carousel-photo" style="background-image: url({{ URL::asset('/imgs/banner-2.jpg') }})"></div>
-            <div class="carousel-photo" style="background-image: url({{ URL::asset('/imgs/banner-3.jpg') }})"></div>
+        <div id="app">
+            <vueper-slides autoplay>
+                <vueper-slide v-for="(image, i) in ['/imgs/banner.jpg', '/imgs/banner-2.jpg', '/imgs/banner-3.jpg']"
+                  :key="i"
+                  :title=""
+                  :image="image"
+                  :content=""
+                  />
+                <template v-slot:pause>
+                  <i class="icon pause_circle_outline"></i>
+                </template>
+            </vueper-slides>
+            <hr>
+            <h1>Conheça alguns de nossos fotógrafos:</h1>
+            <lista-fotografos></lista-fotografos>
         </div>
-
-        <div class="container-perfils">
-            <!-- For dos usuarios cadastrados !-->
-            <div class="panel-perfil">
-                <div class="banner">
-                    <img src="{{ URL::asset('/imgs/banner.jpg') }}">
-                </div>
-                <div class="informacao">
-                    <div class="usuario">
-                        <img src="{{ URL::asset('/imgs/foto.jpg') }}">
-                        <h3>Camila</h3>
-                    </div>
-                    <div class="categoria">
-                        <h3>Categorias</h3>
-                        <div class="tag">
-                            <a href="" class="btn bg-yellow ">Casamento</a>
-                            <a href="" class="btn bg-yellow ">Casamento</a>
-                            <a href="" class="btn bg-yellow ">Casamento</a>
-                        </div>
-                        <p>
-                                mini apresentação
-                        </p>
-                        <a href="{{ route('fotografo.perfil', ['id' => 1]) }}" class="saiba-mais">Saiba mais</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel-perfil">
-                <div class="banner">
-                    <img src="{{ URL::asset('/imgs/banner.jpg') }}">
-                </div>
-                <div class="informacao">
-                    <div class="usuario">
-                        <img src="{{ URL::asset('/imgs/foto.jpg') }}">
-                        <h3>Camila</h3>
-                    </div>
-                    <div class="categoria">
-                        <h3>Categorias</h3>
-                        <div class="tag">
-                            <a href="" class="btn bg-yellow ">Casamento</a>
-                            <a href="" class="btn bg-yellow ">Casamento</a>
-                            <a href="" class="btn bg-yellow ">Casamento</a>
-                        </div>
-                        <p>
-                                mini apresentação
-                        </p>
-                        <a href="{{ route('fotografo.perfil', ['id' => 1]) }}" class="saiba-mais">Saiba mais</a>
-                    </div>
-                </div>
-            </div>
+        <div id="conheca-outros-fotografos">
+            <a href="/fotografo" class="btn bg-yellow">Conheça outros</a>
         </div>
     </div>
 @endsection

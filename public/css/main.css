@@ -27,6 +27,18 @@ div.container {
     color: white;
 }
 
+#logo-fotolab {
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-decoration: none;
+    color: black;
+}
+
+#logo-fotolab:hover {
+    color: gray;
+}
+
+
 .bg-yellow {
     background-color: #FFC82C;
     color: #000000;

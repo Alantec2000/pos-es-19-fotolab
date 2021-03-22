@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Fotografo;
 use App\Models\Servico;
 use App\Models\Usuario;
 use Carbon\Carbon;
@@ -36,6 +37,7 @@ class ServicoTest extends TestCase
                 'id' => $params['fotografo']
             ]), $params);
 
+
         $response->assertStatus(200);
         $response->assertViewIs('servico.novo.sucesso');
         $this->assertDatabaseHas(Servico::TABLE_NAME, [
@@ -63,6 +65,29 @@ class ServicoTest extends TestCase
         $this->assertDatabaseHas('fl_servicos', [
             'id' => $servico->id,
             'status' => $status
+        ]);
+    }
+
+    /**
+     * Valida se um usuário que não tem envolvimento com um serviço não pode alterar seu status.
+     */
+    public function testFotografoAtualizarStatusServicoSemEnvolvimento()
+    {
+        $this->seed('CreateProfileTypes');
+
+        $servico = Servico::factory()->createOne();
+        $fotografo = Usuario::factory()->fotografo()->createOne();
+
+        $status = 'analisando';
+
+        $response = $this->actingAs($fotografo)
+            ->patch(route('fotografo.servico.update.status', ['servico' => $servico->id, 'status' => $status]));
+
+        $response->assertStatus(403);
+
+        $this->assertDatabaseHas('fl_servicos', [
+            'id' => $servico->id,
+            'status' => $servico->status
         ]);
     }
 

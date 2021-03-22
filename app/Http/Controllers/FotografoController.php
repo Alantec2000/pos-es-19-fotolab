@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOS\ConsultaFotografoFiltros;
+use App\Http\Requests\ConsultaFotografosRequest;
 use App\Models\Fotografo;
 use App\Models\TipoPerfil;
+use App\Services\FotografoService;
 
 class FotografoController extends Controller
 {
-    public function perfil($id)
+    public function index(ConsultaFotografosRequest $request)
     {
-        $fotografo = Fotografo::whereId($id)
-            ->whereTipoPerfilId(TipoPerfil::whereNome('Fotografo')->first()->id)
-            ->with([
-                'fotoPerfil',
-                'fotoCapa'
-            ])
-            ->first();
+        return view('fotografo.index');
+    }
+    
+    public function show(Fotografo $fotografo)
+    {
+        abort_if(
+            !$fotografo || !$fotografo->temPerfilFotografo(),
+            404,
+            "Fotografo não encontrado!"
+        );
 
-        if (!$fotografo) {
-            abort(404, "Fotografo não encontrado!");
-        }
-
-        return view('fotografo.perfil', [
-            'fotografo' => $fotografo
-        ]);
+        return view('fotografo.perfil', compact('fotografo'));
     }
 }

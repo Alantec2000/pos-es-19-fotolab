@@ -22,7 +22,7 @@ class UsuarioFeatureTest extends TestCase
 
         $response->assertStatus(200);
         
-        $response->assertViewIs('cadastro.sucesso');
+        $response->assertViewIs('usuario.cadastro.sucesso');
         $response->assertViewHas('nome_usuario', $params['nome']);
         $response->assertViewHas('id');
 
@@ -94,11 +94,11 @@ class UsuarioFeatureTest extends TestCase
         $tipoParams = !$nomeTipoPerfil ? [] : ['nome' => $nomeTipoPerfil];
 
         $params = [
-            'email' => '12345',
+            'email' => $this->faker->email(),
             'senha' => $this->faker->password(8, 15),
             'nome' => $this->faker->firstName(),
             'sobrenome' => $this->faker->lastName,
-            'data_nascimento' => $this->faker->date('d/m/Y'),
+            'data_nascimento' => $this->faker->date('Y-m-d'),
             'tipo' => strtolower($tipoFactory->create($tipoParams)->nome)
         ];
 

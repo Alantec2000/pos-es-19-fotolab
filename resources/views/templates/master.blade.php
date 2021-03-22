@@ -6,7 +6,7 @@
         <title>Fotolab | @yield('pageName') </title>
 
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,600&display=swap" rel="stylesheet">
-        
+
         <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
         <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
 
@@ -21,6 +21,7 @@
         <script src="{{ asset('js/jquery/jquery.slim.min.js') }}"></script>
         <script src="{{ asset('js/jquery/slick.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
         @yield('js-view')
     </body>
 </html>
