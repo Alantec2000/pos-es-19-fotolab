@@ -2,7 +2,7 @@
 
 @section('conteudo-view')
     <div id="form-session">
-        <form method="POST" action="{{ route('cadastro.novo') }}" class="panel-cadastro">
+        <form method="POST" id="form_novo_servico" action="{{ route('servico.store') }}" class="panel-cadastro">
             @csrf
             <div class="d-r">
                 <h2>CADASTRO DE SERVIÇO</h2>
@@ -17,13 +17,13 @@
             <div id="ft_form_novo_servico" class="form">
 
                 <div class="d-r">
-                    <label for="data_nascimento">Inicio do evento:</label>
-                    <input type='datetime-local' id="data_nascimento" name="data_nascimento">
+                    <label for="data_inicio">Inicio do evento:</label>
+                    <input type='datetime-local' id="data_inicio" name="data_inicio">
                 </div>
 
                 <div class="d-r">
-                    <label for="data_nascimento">Final do evento:</label>
-                    <input type='datetime-local' id="data_nascimento" name="data_nascimento">
+                    <label for="data_fim">Final do evento:</label>
+                    <input type='datetime-local' id="data_fim" name="data_fim">
                 </div>
 
                 <div class="d-r">
@@ -33,11 +33,9 @@
 
                 <div class="d-r">
                     <label for="descricao">Descrição:</label>
-                    <textarea class="descricao_servico" name="descricao" form="ft_form_novo_usuario" rows="7" cols="34" placeholder="Descrição do evento" onfocus="this.placeholder=''" onblur="this.placeholder='Descrição do evento'"></textarea>
+                    <textarea class="descricao_servico" id="descricao" name="descricao" form="form_novo_servico" rows="7" cols="34" placeholder="Descrição do evento" onfocus="this.placeholder=''" onblur="this.placeholder='Descrição do evento'"></textarea>
                 </div>
         
-            {{-- <input type="button" class="file" name="attachement" onmouseover="(this.type='file')" onmouseout="(this.type='button')" value="Foto do perfil" /> --}}
-            {{-- <input type="button" class="file" name="attachement" onmouseover="(this.type='file')" onmouseout="(this.type='button')" value="Foto de capa" /> --}}
                 <div class="d-r j-ct-c">
                     <button type="submit" name="btnCadastrar" class="btn bg-dark w-1">Cadastrar</button>
                 </div>
