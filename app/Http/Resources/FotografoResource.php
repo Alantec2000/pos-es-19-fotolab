@@ -20,8 +20,8 @@ class FotografoResource extends JsonResource
             'url_foto_capa' => $this->url_foto_capa,
             'data_nascimento' => $this->data_nascimento,
             'data_cadastro' => $this->created_at,
-            'nome' => $this->nome,
-            'sobrenome' => $this->sobrenome,
+            'nome' => ucwords($this->nome),
+            'sobrenome' => ucwords($this->sobrenome),
             'email' => $this->email,
             'categorias' => $this->categorias ?? []
         ];

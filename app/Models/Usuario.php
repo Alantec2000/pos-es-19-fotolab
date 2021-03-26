@@ -27,8 +27,6 @@ class Usuario extends User
 
     protected $guarded = ['id', 'senha'];
 
-    protected $appends = ['nomeCompleto'];
-
     public function tipoPerfil()
     {
         return $this->belongsTo(TipoPerfil::class);

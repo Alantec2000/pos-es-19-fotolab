@@ -1,10 +1,8 @@
 <template>
     <div id="lista-fotografos">
-        <div v-show="loading === true" id="loading-lista-fotografo">
-            <img src="/imgs/loading.gif" alt="imagem de carregamento">
-        </div>
+        <loading ref="loading" :isLoading="true"></loading>
         <div 
-            v-show="!loading" 
+            v-show="!this.$refs.loading.isLoading" 
             class="panel-perfil bg-dark" 
             :key="fotografo.id" 
             v-for="fotografo in this.fotografos" 
@@ -16,7 +14,7 @@
             <div class="informacao">
                 <div class="usuario">
                     <img :src="fotografo.url_foto_perfil || '/imgs/foto.jpg'" alt="foto de perfil">
-                    <h3 class="bg-yellow">{{fotografo.nome}}</h3>
+                    <h3 class="bg-yellow">{{fotografo.nome + " " + fotografo.sobrenome[0] + "."}}</h3>
                 </div>
                 <div class="lista-pequena-categoria">
                     <lista-pequena-categorias :categorias="fotografo.categorias">
@@ -29,12 +27,12 @@
 
 <script>
 import ListaPequenaCategorias from './ListaPequenaCategorias.vue';
+import Loading from './Loading';
 
 export default {
     data: () => {
         return {
             fotografos: [],
-            loading: true
         }
     },
 
@@ -43,17 +41,18 @@ export default {
     },
 
     components: {
-        ListaPequenaCategorias
+        ListaPequenaCategorias,
+        Loading
     },
 
     methods: {
         carregarFotografos: function () {
-            this.loading = true;
+            this.$refs.loading.isLoading = true;
 
             axios.get('/api/fotografo')
             .then((response) => {
                 this.fotografos = response.data.data;
-                this.loading = false;
+                this.$refs.loading.isLoading = false;
             })
             .catch((erro) => {
                 console.log(erro);

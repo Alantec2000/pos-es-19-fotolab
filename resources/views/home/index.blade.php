@@ -2,14 +2,18 @@
 
 @section('css-view')
     <style type="text/css">
+        #app {
+            margin: 0 1rem;
+        }
+
         #conheca-outros-fotografos {
             text-align: center;
             margin: 40px;
         }
 
         #conheca-outros-fotografos a {
-            font-size: 2.5rem;
-            font-weight: 400;
+            font-size: 2.2rem;
+            font-weight: 300;
         }
 
         #lista_fotografos {
@@ -37,7 +41,7 @@
                 </template>
             </vueper-slides>
             <hr>
-            <h1>Conheça alguns de nossos fotógrafos:</h1>
+            <h1 id="conheca-outros-fotografos-header">Conheça alguns de nossos fotógrafos:</h1>
             <lista-fotografos></lista-fotografos>
         </div>
         <div id="conheca-outros-fotografos">

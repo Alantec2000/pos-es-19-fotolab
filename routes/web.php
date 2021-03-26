@@ -27,9 +27,6 @@ Route::namespace('App\Http\Controllers')
         })->name('cadastro.sucesso');
     });
 
-    Route::resource('fotografo', 'FotografoController')
-        ->only(['index', 'show']);
-
     Route::middleware('auth:web')->group(function () {
         Route::resource('servico', 'ServicoController')
         ->only(['index', 'show']);
@@ -46,14 +43,18 @@ Route::namespace('App\Http\Controllers')
             });
         });
 
-        Route::resource('fotografo', 'FotografoController')
-        ->only(['edit', 'update']);
-
         Route::prefix('fotografo')->group(function () {
+            Route::get('portfolio', 'PortfolioController@index')->name('fotografo.portfolio.index');
+            Route::get('portfolio/editar', 'PortfolioController@edit')->name('fotografo.portfolio.edit');
+
             Route::patch('/servico/{servico}/{status}', 'ServicoController@atualizarStatusFotografo')
             ->name('fotografo.servico.update.status');
-        });    
+        });
     });
+    
+    Route::get('fotografo', 'FotografoController@index')->name('fotografo.index');
+    Route::get('fotografo/{fotografo}', 'FotografoController@show')->name('fotografo.show');
+
     Route::get('/signin', 'LoginController@signin')->name('login');
     Route::get('/signout', 'LoginController@signout')->name('deslogar');
     Route::post('/signin/authenticate', 'LoginController@autenticarUsuario')->name('login.autenticar');

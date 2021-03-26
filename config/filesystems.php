@@ -55,6 +55,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'imgs_portfolio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/imgs/portfolios'),
+            'relative_path' => '/imgs/portfolios',
+            'url' => env('APP_URL') . '/storage/app/imgs/portfolios'
+        ],
+
         'imgs_foto_perfil' => [
             'driver' => 'local',
             'root' => storage_path('app/imgs/foto_perfil'),
